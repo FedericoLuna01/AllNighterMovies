@@ -1,20 +1,19 @@
 import { Container, Grid, Stack } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { getMovies } from '../API/getMovies'
 import { MovieCard } from '../components/MovieCard'
+import { getRecentMovies } from '../API/getMovies'
 
-export const Discover = () => {
+export const Recent = () => {
   const [movies, setMovies] = useState([])
 
-  const getPopMovies = async () => {
-    const data = await getMovies()
+  const getRecentMovie = async () => {
+    const data = await getRecentMovies()
     setMovies(data.results)
   }
 
   useEffect(() => {
-    getPopMovies()
+    getRecentMovie()
   }, [])
-
   return (
     <Stack
       bg='gray.100'

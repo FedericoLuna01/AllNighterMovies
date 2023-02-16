@@ -7,13 +7,14 @@ const MENU_ITEMS = [
     to: '/descubrir'
   },
   {
-    label: 'Buscar',
-    to: '/buscar'
+    label: 'Recientes',
+    to: '/recientes'
   },
   {
-    label: 'Iniciar Sesion',
-    to: '/'
+    label: 'Buscar',
+    to: '/buscar'
   }
+
 ]
 
 export const Navbar = () => {
@@ -34,7 +35,7 @@ export const Navbar = () => {
         <Heading
           as={ReachLink}
           to='/'
-        >Peliculas</Heading>
+        >All Nighter</Heading>
       </Stack>
         <Stack
           direction='row'

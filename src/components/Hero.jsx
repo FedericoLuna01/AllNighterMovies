@@ -21,14 +21,14 @@ export const Hero = () => {
           as='h1'
           color='white'
         >
-          Tus peliculas favoritas.
+          Las mejores películas para All Nightear
         </Heading>
         <Heading
           as='h2'
           color='gray.600'
           size='md'
         >
-          Encuentra todo sobre tus películas favoritas.
+          Buscá información para empezar tu jornada 8pm 4am.
         </Heading>
       </Stack>
       <Stack

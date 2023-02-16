@@ -1,9 +1,9 @@
-import { Navbar } from '../components/Navbar'
+import { Text } from '@chakra-ui/react'
 
 export const Search = () => {
   return (
     <>
-      <Navbar />
+    <Text>Buscar</Text>
     </>
   )
 }

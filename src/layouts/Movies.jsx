@@ -1,7 +1,8 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { Center, Container, Link, Stack, Text } from '@chakra-ui/react'
+import { Link as RouterLink } from 'react-router-dom'
 
-export const Movies = ({ children, title, icon, bg }) => {
+export const Movies = ({ children, title, icon, bg, to }) => {
   return (
     <Container
       maxW='container.xl'
@@ -34,7 +35,10 @@ export const Movies = ({ children, title, icon, bg }) => {
             </Text>
           </Stack>
           <Stack>
-            <Link>
+            <Link
+              as={RouterLink}
+              to={`/${to}`}
+            >
               Ver todas {<ArrowForwardIcon />}
             </Link>
           </Stack>
