@@ -16,7 +16,7 @@ export const Recent = () => {
   }, [])
   return (
     <Stack
-      bg='gray.100'
+      bg='blackAlpha.800'
       align='center'
     >
       <Container

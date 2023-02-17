@@ -48,6 +48,10 @@ export const MovieInfo = () => {
   return (
     <Stack
       py={32}
+      bg='blackAlpha.800'
+      minH='100vh'
+      justify='center'
+      color='white'
     >
       <Container
         maxW='container.xl'

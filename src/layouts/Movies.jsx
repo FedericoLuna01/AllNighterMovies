@@ -4,13 +4,15 @@ import { Link as RouterLink } from 'react-router-dom'
 
 export const Movies = ({ children, title, icon, bg, to }) => {
   return (
+    <Stack
+      bg={bg}
+    >
     <Container
       maxW='container.xl'
-      bg={bg}
     >
       <Stack
         align='center'
-        p={16}
+        py={24}
       >
         <Stack
           direction='row'
@@ -20,6 +22,7 @@ export const Movies = ({ children, title, icon, bg, to }) => {
           <Stack
             direction='row'
             align='center'
+            color='white'
           >
             <Center
               w='30px'
@@ -38,6 +41,7 @@ export const Movies = ({ children, title, icon, bg, to }) => {
             <Link
               as={RouterLink}
               to={`/${to}`}
+              color='white'
             >
               Ver todas {<ArrowForwardIcon />}
             </Link>
@@ -46,5 +50,6 @@ export const Movies = ({ children, title, icon, bg, to }) => {
         {children}
       </Stack>
     </Container>
+    </Stack>
   )
 }

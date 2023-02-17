@@ -20,7 +20,7 @@ export const RecentlyAdded = () => {
     <Movies
       title='Películas recientemente añadidas'
       linkTitle=''
-      bg='gray.100'
+      bg='blackAlpha.800'
       icon={<StackIcon color='#f00' />}
       to={'recientes'}
     >

@@ -5,13 +5,17 @@ import { MoviePoster } from './MoviePoster'
 
 export const MovieCard = ({ movie }) => {
   return (
-    <Card key={movie.id} >
+    <Card
+      key={movie.id}
+      bg='blackAlpha.800'
+    >
       <CardBody>
         <Stack>
           <MoviePoster movie={movie}/>
           <Heading
             size='md'
             as={RouterLink}
+            color='white'
             _hover={{ color: 'orange.500' }}
             to={`/pelicula/${movie.id}`}
             w='fit-content'
@@ -21,7 +25,11 @@ export const MovieCard = ({ movie }) => {
         </Stack>
       </CardBody>
       <CardFooter>
-        <Text>Puntuación: {getStars(movie.vote_average)}</Text>
+        <Text
+          color='white'
+        >
+          Puntuación: {getStars(movie.vote_average)}
+        </Text>
       </CardFooter>
     </Card>
   )

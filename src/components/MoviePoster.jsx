@@ -7,6 +7,7 @@ export const MoviePoster = ({ movie, index }) => {
       key={movie.id}
       colSpan={ index === 0 ? 2 : 1}
       rowSpan={ index === 0 ? 2 : 1}
+      boxShadow='lg'
     >
       <LinkBox
         _hover={{ filter: 'brightness(.5)' }}

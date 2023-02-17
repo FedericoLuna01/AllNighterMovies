@@ -1,5 +1,4 @@
-import { SearchIcon } from '@chakra-ui/icons'
-import { Heading, Input, InputGroup, InputLeftElement, Stack } from '@chakra-ui/react'
+import { Heading, Stack } from '@chakra-ui/react'
 
 export const Hero = () => {
   return (
@@ -30,23 +29,6 @@ export const Hero = () => {
         >
           Buscá información para empezar tu jornada 8pm 4am.
         </Heading>
-      </Stack>
-      <Stack
-        align='center'
-      >
-        <InputGroup
-          w='50vw'
-        >
-          <InputLeftElement
-            pointerEvents='none'
-            children={<SearchIcon />}
-          />
-          <Input
-            placeholder='Buscá una película...'
-            borderRadius='full'
-            bg='white'
-          />
-        </InputGroup>
       </Stack>
     </Stack>
   )

@@ -19,20 +19,21 @@ export const PopularMovies = () => {
     <Movies
       title='Películas populares'
       linkTitle='Ver todas...'
+      bg='blackAlpha.800'
       icon={<IconFlame size='20' color='#f00'/>}
       to='descubrir'
     >
       <Grid
-          templateColumns='repeat(6, 1fr)'
-          templateRows='repeat(2, 1fr)'
-          gap={5}
-        >
-          {
-            movies.map((movie, index) => (
-              <MoviePoster key={movie.id} movie={movie} index={index} />
-            ))
-          }
-        </Grid>
+        templateColumns='repeat(6, 1fr)'
+        templateRows='repeat(2, 1fr)'
+        gap={5}
+      >
+        {
+          movies.map((movie, index) => (
+            <MoviePoster key={movie.id} movie={movie} index={index} />
+          ))
+        }
+      </Grid>
     </Movies>
   )
 }
