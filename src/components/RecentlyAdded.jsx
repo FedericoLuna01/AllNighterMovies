@@ -14,7 +14,6 @@ export const RecentlyAdded = () => {
     }
     getRecentMovie()
   }, [])
-  console.log(movies)
 
   return (
     <Movies

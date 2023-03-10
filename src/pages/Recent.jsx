@@ -1,40 +1,43 @@
-import { Container, Grid, Stack } from '@chakra-ui/react'
+import { Stack } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { MovieCard } from '../components/MovieCard'
 import { getRecentMovies } from '../API/getMovies'
+import { Pagination } from '../components/Pagination'
+import { MovieGrid } from '../components/MovieGrid'
+import { AllMovies } from '../layouts/AllMovies'
 
 export const Recent = () => {
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState()
+  const [totalPages, setTotalPages] = useState()
+  const [actualPage, setActualPage] = useState(1)
 
   const getRecentMovie = async () => {
-    const data = await getRecentMovies()
+    const data = await getRecentMovies(actualPage)
+    setTotalPages(data.total_pages)
     setMovies(data.results)
   }
 
   useEffect(() => {
     getRecentMovie()
-  }, [])
+  }, [actualPage])
+
   return (
-    <Stack
-      bg='blackAlpha.800'
-      align='center'
-    >
-      <Container
-        maxW='container.xl'
-      >
-        <Grid
-          pt={20}
-          gap={6}
-          templateColumns='repeat(4, 1fr)'
-          zIndex={1}
+    <AllMovies>
+      <MovieGrid movies={movies} />
+      <Stack
+          h='10vh'
+          align='center'
+          justify='center'
         >
           {
-            movies && movies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))
+            movies && (
+              <Pagination
+                actualPage={actualPage}
+                setActualPage={setActualPage}
+                totalPages={totalPages}
+              />
+            )
           }
-        </Grid>
-      </Container>
-    </Stack>
+        </Stack>
+    </AllMovies>
   )
 }

@@ -1,82 +1,82 @@
 import { StarIcon } from '@chakra-ui/icons'
-import { Container, Grid, Stack, Text } from '@chakra-ui/react'
+import { Stack, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { getMovies } from '../API/getMovies'
-import { MovieCard } from '../components/MovieCard'
+import { MovieGrid } from '../components/MovieGrid'
+import { Pagination } from '../components/Pagination'
+import { AllMovies } from '../layouts/AllMovies'
+
+const STARS = [1, 2, 3, 4, 5]
 
 export const Discover = () => {
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState()
+  const [filteredMovies, setFilteredMovies] = useState([])
+  const [actualPage, setActualPage] = useState(1)
+  const [totalPages, setTotalPages] = useState()
+  const [starsRating, setStarsRating] = useState()
 
   const getPopMovies = async () => {
-    const data = await getMovies()
+    const data = await getMovies(actualPage)
+    setTotalPages(data.total_pages)
     setMovies(data.results)
+    setFilteredMovies(data.results)
+  }
+
+  const handleRating = (rating) => {
+    if (rating === starsRating) {
+      setFilteredMovies(movies)
+      setStarsRating(0)
+      return
+    }
+    const filteredMovies = movies.filter((movie) => Math.floor(movie.vote_average) <= rating * 2 && Math.floor(movie.vote_average) >= rating * 2 - 2)
+    setStarsRating(rating)
+    setFilteredMovies(filteredMovies)
   }
 
   useEffect(() => {
     getPopMovies()
-  }, [])
+  }, [actualPage])
 
   return (
-    <Stack
-      bg='blackAlpha.800'
-      align='center'
-    >
-      <Container
-        maxW='container.xl'
-      >
-        <Stack
-          pt={32}
-        >
+    <AllMovies>
           <Stack
             direction='row'
             align='center'
           >
-            <Text>Filtrar por:</Text>
+            <Text color='white'>Filtrar por:</Text>
             <Stack
               direction='row'
+              py={5}
             >
-              {/* filtrar por estrellas */}
-              <StarIcon
-                color='yellow.500'
-                _hover={{ color: 'yellow.300' }}
-                cursor='pointer'
-              />
-              <StarIcon
-                color='yellow.500'
-                _hover={{ color: 'yellow.300' }}
-                cursor='pointer'
-              />
-              <StarIcon
-                color='yellow.500'
-                _hover={{ color: 'yellow.300' }}
-                cursor='pointer'
-              />
-              <StarIcon
-                color='yellow.500'
-                _hover={{ color: 'yellow.300' }}
-                cursor='pointer'
-              />
-              <StarIcon
-                color='yellow.500'
-                _hover={{ color: 'yellow.300' }}
-                cursor='pointer'
-              />
+              {
+                STARS.map((star) => (
+                  <StarIcon
+                    key={star}
+                    onClick={() => handleRating(star)}
+                    color={star <= starsRating ? 'yellow.500' : 'gray.500'}
+                    _hover={{ color: 'yellow.300' }}
+                    cursor='pointer'
+                  />
+                ))
+              }
             </Stack>
           </Stack>
-        </Stack>
-        <Grid
-          pt={10}
-          gap={6}
-          templateColumns='repeat(4, 1fr)'
-          zIndex={1}
+          <MovieGrid movies={filteredMovies} />
+        <Stack
+          h='10vh'
+          align='center'
+          justify='center'
         >
           {
-            movies && movies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))
+            movies && (
+              <Pagination
+                actualPage={actualPage}
+                setActualPage={setActualPage}
+                totalPages={totalPages}
+              />
+            )
           }
-        </Grid>
-      </Container>
-    </Stack>
+        </Stack>
+    </AllMovies>
   )
 }
