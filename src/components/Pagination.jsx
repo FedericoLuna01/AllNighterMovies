@@ -38,7 +38,7 @@ export const Pagination = ({ actualPage, setActualPage, totalPages }) => {
 
   return (
     <Stack
-      direction='row'
+      direction={{ base: 'column', md: 'row' }}
       align='center'
       justify='center'
       py={5}
@@ -53,6 +53,9 @@ export const Pagination = ({ actualPage, setActualPage, totalPages }) => {
             >
               Anterior
             </Button>
+            <Stack
+              direction='row'
+            >
             {
                 templatePages.map(page => {
                   return (
@@ -67,6 +70,7 @@ export const Pagination = ({ actualPage, setActualPage, totalPages }) => {
                   )
                 })
             }
+            </Stack>
             <Button
               colorScheme='orange'
               variant='solid'
