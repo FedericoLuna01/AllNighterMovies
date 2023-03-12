@@ -1,20 +1,25 @@
-import { Heading, Stack } from '@chakra-ui/react'
+import { Center, Heading, Stack } from '@chakra-ui/react'
 
 export const Hero = () => {
   return (
-    <Stack
-      // bgImage={'url(/hero-background.jpg)'}
-      // bgPosition={'center'}
-      bg='blackAlpha.900'
+    <Center
+      bgColor='blackAlpha.800'
+      bgImg={'url(/bg-hero.png)'}
       h='40vh'
-      w='100%'
-      bgRepeat='no-repeat'
       bgSize='cover'
       justify='center'
       gap={10}
+      p={5}
+      boxShadow='md'
     >
       <Stack
         align='center'
+        textAlign='center'
+        gap={2}
+        p={8}
+        bgColor='blackAlpha.800'
+        w='fit-content'
+        borderRadius={10}
       >
         <Heading
           as='h1'
@@ -30,6 +35,6 @@ export const Hero = () => {
           Buscá información para empezar tu jornada 8pm 4am.
         </Heading>
       </Stack>
-    </Stack>
+    </Center>
   )
 }

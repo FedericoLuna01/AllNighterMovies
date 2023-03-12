@@ -8,6 +8,10 @@ export const MovieCard = ({ movie }) => {
     <Card
       key={movie.id}
       bg='blackAlpha.800'
+      maxW={{
+        base: '250px',
+        md: '300px'
+      }}
     >
       <CardBody>
         <Stack>

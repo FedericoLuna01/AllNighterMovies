@@ -24,7 +24,7 @@ export const RecentlyAdded = () => {
       to={'recientes'}
     >
       <Grid
-        templateColumns='repeat(6, 1fr)'
+        templateColumns={{ base: 'repeat(3, 1fr)', lg: 'repeat(6, 1fr)' }}
         gap={5}
       >
         {

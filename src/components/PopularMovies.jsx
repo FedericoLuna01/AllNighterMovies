@@ -24,7 +24,7 @@ export const PopularMovies = () => {
       to='descubrir'
     >
       <Grid
-        templateColumns='repeat(6, 1fr)'
+        templateColumns={{ base: 'repeat(3, 1fr)', md: 'repeat(6, 1fr)' }}
         templateRows='repeat(2, 1fr)'
         gap={5}
       >

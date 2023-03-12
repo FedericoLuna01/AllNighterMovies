@@ -1,4 +1,4 @@
-import { Container, Image, Stack, Text } from '@chakra-ui/react'
+import { Container, Heading, Image, Stack, StackDivider, Tag, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getStars } from '../herlpers/getStars'
@@ -23,7 +23,7 @@ export const MovieInfo = () => {
     genres.forEach(genre => {
       genresArray.push(genre.name)
     })
-    return genresArray.join(', ')
+    return genresArray
   }
 
   const getRuntime = (runtime) => {
@@ -47,57 +47,120 @@ export const MovieInfo = () => {
   console.log(movie)
   return (
     <Stack
-      py={32}
       bg='blackAlpha.800'
-      minH='100vh'
-      justify='center'
       color='white'
     >
       <Container
         maxW='container.xl'
+        minH='91vh'
       >
         {
           movie &&
           <Stack
-            direction='row'
+            direction='column'
+            h='100%'
           >
+            <Stack
+              pos='relative'
+              h='25vh'
+            >
               <Stack
-                w='500px'
-              >
-                <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
-              </Stack>
+                pos='absolute'
+                bgGradient={'linear(to-t, blackAlpha.800, transparent)'}
+                zIndex={2}
+                w='100%'
+                h='100%'
+              ></Stack>
+              <Image
+                zIndex={1}
+                src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+                alt={movie.title}
+                filter='opacity(.5)'
+                h='100%'
+                objectFit='cover'
+                objectPosition={'center'}
+                sx={{ marginTop: '0 !important' }}
+              />
+            </Stack>
+            <Stack
+              bg='blackAlpha.800'
+              p={10}
+              borderBottomRadius='md'
+              direction={{ base: 'column', md: 'row' }}
+              align='center'
+              sx={{ marginTop: '0 !important' }}
+            >
+              <Image
+                borderRadius='md'
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title}
+                w='300px'
+                h='400px'
+                mr={{ base: 0, md: 12 }}
+              />
               <Stack
-                justify='space-between'
+                gap={5}
+                p={{ base: 0, md: 10 }}
+                w='100%'
               >
-                <Text
-                  fontSize='2xl'
-                >
-                  <strong>{movie.title}</strong> {`(${getDate(movie.release_date)})`}
-                </Text>
                 <Stack>
-                  <Text>Duración: {getRuntime(movie.runtime)}</Text>
-                  <Text>Generos: {getGenres(movie.genres)}</Text>
-                </Stack>
-                <Text
-                  fontSize='md'
-                  >
-                  {movie.overview}
-                </Text>
-                <Text>Produccion: {getProdCompanies(movie.production_companies)}</Text>
-                <Stack
-                  direction='row'
-                  align='center'
-                  gap={1}
-                >
+                  <Heading as='h1'>{movie.title} {`(${getDate(movie.release_date)})`}</Heading>
                   <Text
-                    fontSize='md'
+                    size='md'
+                    color='gray.400'
+                  >Titulo original: {movie.original_title}</Text>
+                </Stack>
+                <Stack>
+                  <Text
                   >
-                    Puntuación:
+                    {movie.overview}
                   </Text>
-                  <Stack direction='row' gap={-1} >{getStars(movie.vote_average)}</Stack>
-                  <Text>{movie.vote_average.toFixed(1)} pts.</Text>
+                </Stack>
+                <Stack
+                  direction='column'
+                  divider={<StackDivider borderColor='gray.500' />}
+                >
+                  <Heading
+                    as='h2'
+                    size='lg'
+                  >Detalles:</Heading>
+                  <Stack
+                    direction='row'
+                    align='center'
+                  >
+                    <Text>Generos: </Text>
+                    <Stack
+                      direction='row'
+                      wrap='wrap'
+                      align='center'
+                    >
+                      {getGenres(movie.genres).map((genre, index) => (
+                        <Tag key={genre} my={2}>{genre}</Tag>
+                      ))}
+                    </Stack>
+                  </Stack>
+                  <Stack>
+                    <Text>Duración: {getRuntime(movie.runtime)}</Text>
+                  </Stack>
+                  <Stack>
+                    <Text>Produccion: {getProdCompanies(movie.production_companies)}</Text>
+                  </Stack>
+                  <Stack
+                    direction='row'
+                    align='center'
+                    gap={1}
+                  >
+                    <Text>Puntuación:</Text>
+                    <Stack
+                      direction='row'
+                      gap={-1} >
+                      {getStars(movie.vote_average)}
+                    </Stack>
+                    <Text>{movie.vote_average.toFixed(1)} pts.</Text>
+                  </Stack>
                 </Stack>
               </Stack>
+            </Stack>
           </Stack>
         }
       </Container>

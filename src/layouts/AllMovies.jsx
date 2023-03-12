@@ -11,7 +11,7 @@ export const AllMovies = ({ children }) => {
         maxW='container.xl'
       >
         <Stack
-          pt={24}
+          pt={5}
         >
           {children}
         </Stack>

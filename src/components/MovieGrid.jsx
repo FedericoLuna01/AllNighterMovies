@@ -5,10 +5,16 @@ export const MovieGrid = ({ movies }) => {
   return (
     <Stack
       align='center'
+      mb={5}
     >
       <Grid
-        gap={6}
-        templateColumns='repeat(4, 1fr)'
+        gap={8}
+        templateColumns={{
+          base: 'repeat(1, 1fr)',
+          sm: 'repeat(2, 1fr)',
+          md: 'repeat(3, 1fr)',
+          lg: 'repeat(4, 1fr)'
+        }}
         zIndex={1}
       >
         {

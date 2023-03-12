@@ -39,6 +39,9 @@ export const Pagination = ({ actualPage, setActualPage, totalPages }) => {
   return (
     <Stack
       direction='row'
+      align='center'
+      justify='center'
+      py={5}
     >
       {
         templatePages && (
