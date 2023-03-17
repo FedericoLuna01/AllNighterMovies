@@ -1,5 +1,5 @@
 export const getMovies = async (page = 1) => {
-  const url = `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_API_KEY}&page=${page}&language=es-AR&include_video=true`
+  const url = `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_API_KEY}&page=${page}&language=es-AR`
   const response = await fetch(url)
   const data = await response.json()
   return data
