@@ -1,16 +1,21 @@
 import { Container, Heading, Image, Stack, StackDivider, Tag, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { LoadingSpinner } from '../components/LoadingSpinner'
 import { getStars } from '../herlpers/getStars'
 
 export const MovieInfo = () => {
   const { id } = useParams()
   const [movie, setMovie] = useState()
+  const [isLoading, setIsLoading] = useState(true)
+
   const getMovie = async (id) => {
+    setIsLoading(true)
     const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_API_KEY}&language=es-AR`
     const response = await fetch(url)
     const data = await response.json()
     setMovie(data)
+    setIsLoading(false)
   }
 
   const getDate = (date) => {
@@ -44,7 +49,6 @@ export const MovieInfo = () => {
     getMovie(id)
   }, [])
 
-  console.log(movie)
   return (
     <Stack
       bg='blackAlpha.800'
@@ -53,10 +57,13 @@ export const MovieInfo = () => {
       <Container
         maxW='container.xl'
         minH='91vh'
-      >
+        >
         {
-          movie &&
-          <Stack
+          isLoading
+            ? (
+            <LoadingSpinner />
+              )
+            : <Stack
             direction='column'
             h='100%'
           >
@@ -134,7 +141,7 @@ export const MovieInfo = () => {
                       wrap='wrap'
                       align='center'
                     >
-                      {getGenres(movie.genres).map((genre, index) => (
+                      {getGenres(movie.genres).map((genre) => (
                         <Tag key={genre} my={2}>{genre}</Tag>
                       ))}
                     </Stack>
@@ -153,7 +160,8 @@ export const MovieInfo = () => {
                     <Text>Puntuación:</Text>
                     <Stack
                       direction='row'
-                      gap={-1} >
+                      gap={-1}
+                    >
                       {getStars(movie.vote_average)}
                     </Stack>
                     <Text>{movie.vote_average.toFixed(1)} pts.</Text>
