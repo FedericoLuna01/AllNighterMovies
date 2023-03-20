@@ -11,7 +11,8 @@ export const MovieInfo = () => {
 
   const getMovie = async (id) => {
     setIsLoading(true)
-    const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_API_KEY}&language=es-AR`
+    const VITE_API_KEY = import.meta.env.VITE_API_KEY
+    const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${VITE_API_KEY}&language=es-AR`
     const response = await fetch(url)
     const data = await response.json()
     setMovie(data)
